@@ -1,0 +1,17 @@
+form {
+    margin-top: 2em;
+    width: 35%;
+}
+
+form > div > * {
+    margin-bottom: 1em !important;
+}
+
+.css-1wllaw9-ColorPicker {
+    display: flex;
+    flex-direction: column;
+}
+
+.css-1wllaw9-ColorPicker > * {
+    margin-bottom: 5px;
+}
