@@ -23,3 +23,12 @@ form > div > * {
 .css-x1r72b-Slider {
     cursor: pointer;
 }
+
+.models-header {
+    display: flex;
+    align-items: center;
+}
+
+.models-header > * {
+    margin-right: 0.3em !important;
+}
