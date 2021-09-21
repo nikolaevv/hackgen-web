@@ -1,4 +1,4 @@
-# Post Bank Chat
+# HackGen
 
 React app for fast generating backend & frontend for project.
 
