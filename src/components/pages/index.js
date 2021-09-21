@@ -1,2 +1,2 @@
-import AppGeneratingForm from './app-genarting-form';
+import AppGeneratingForm from './app-generating-form';
 export {AppGeneratingForm};

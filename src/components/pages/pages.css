@@ -3,6 +3,10 @@ form {
     width: 35%;
 }
 
+.list-item {
+    margin: 0 0.5em 0.5em 0 !important;
+}
+
 form > div > * {
     margin-bottom: 1em !important;
 }
@@ -14,4 +18,8 @@ form > div > * {
 
 .css-1wllaw9-ColorPicker > * {
     margin-bottom: 5px;
+}
+
+.css-x1r72b-Slider {
+    cursor: pointer;
 }
