@@ -13,8 +13,10 @@ const FormPageOne = ({formik, history}) => {
         }
     };
 
-    const goToNextPage = () => {
-        history.push('/app/create/2')
+    const onContinueClicked = () => {
+        if (formik.isValid) {
+            history.push('/app/create/2');
+        }
     };
 
     return (
@@ -179,7 +181,7 @@ const FormPageOne = ({formik, history}) => {
 
             <Button
                 variant="contained"
-                onClick={goToNextPage}
+                onClick={onContinueClicked}
             >
                     Continue
             </Button>

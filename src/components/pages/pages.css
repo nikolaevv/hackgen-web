@@ -32,3 +32,8 @@ form > div > * {
 .models-header > * {
     margin-right: 0.3em !important;
 }
+
+.field {
+    display: flex;
+    
+}
