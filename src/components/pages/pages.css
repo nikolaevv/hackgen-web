@@ -1,6 +1,6 @@
 form {
     margin-top: 2em;
-    width: 35%;
+    width: 60%;
 }
 
 .list-item {
@@ -31,4 +31,30 @@ form > div > * {
 
 .models-header > * {
     margin-right: 0.3em !important;
+}
+
+.model-field {
+    display: flex;
+    margin-top: 1em;
+}
+
+.model-field > * {
+    margin-right: 1em !important;
+    flex-grow: 1;
+}
+
+.model-title {
+    margin-bottom: 0.5em !important;
+}
+
+.model-field-add-btn {
+    margin-top: 1em !important;
+}
+
+.submit-btn {
+    margin-top: 1em !important;
+}
+
+.model-container {
+    margin-top: 2em;
 }

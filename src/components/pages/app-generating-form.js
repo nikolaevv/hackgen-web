@@ -18,7 +18,7 @@ const AppGeneratingForm = () => {
             secondaryContrastColor: '#000',
             componentNames: ['header', 'footer'],
             models: [
-                {'title': 'User', fields: [{'type': 'Integer', 'name': 'age'}]}
+                {'title': 'User', fields: [{'type': 'Integer', 'name': 'age', 'isNullAcceptable': false, 'defaultValue': ''}, {'type': 'Integer', 'name': 'isGood', 'isNullAcceptable': true, 'defaultValue': ''}]}
             ]
         },
         validationSchema: schema,
