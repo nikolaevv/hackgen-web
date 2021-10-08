@@ -10,14 +10,14 @@ const FormPageTwo = ({formik}) => {
     const onModelFieldAdded = (model, idx) => {
         formik.setFieldValue(
             `models.${idx}.fields`, 
-            [...model.fields, {'type': 'Integer', 'name': '', 'isNullAcceptable': false, 'defaultValue': ''}]
+            [...model.fields, {'type': 'Integer', 'name': '', 'nullable': false, 'default': ''}]
         );
     };
 
     const onModelAdded = () => {
         formik.setFieldValue(
             `models`, 
-            [...formik.values.models, {'title': 'Model', fields: []}]
+            [...formik.values.models, {'title': 'Model', relations: [], fields: []}]
         );
     };
 
@@ -89,18 +89,18 @@ const FormPageTwo = ({formik}) => {
                                                         fullWidth
                                                         label="Default value"
                                                         variant="outlined"
-                                                        value={field.defaultValue}
+                                                        value={field.default}
                                                         onChange={formik.handleChange}
-                                                        id={`models.${idx}.fields.${fieldIdx}.defaultValue`}
-                                                        name={`models.${idx}.fields.${fieldIdx}.defaultValue`}
+                                                        id={`models.${idx}.fields.${fieldIdx}.default`}
+                                                        name={`models.${idx}.fields.${fieldIdx}.default`}
                                                     />
 
                                                     <FormControlLabel control={
                                                         <Checkbox
-                                                            checked={field.isNullAcceptable}
+                                                            checked={field.nullable}
                                                             onChange={formik.handleChange}
-                                                            id={`models.${idx}.fields.${fieldIdx}.isNullAcceptable`}
-                                                            name={`models.${idx}.fields.${fieldIdx}.isNullAcceptable`}
+                                                            id={`models.${idx}.fields.${fieldIdx}.nullable`}
+                                                            name={`models.${idx}.fields.${fieldIdx}.nullable`}
                                                         />
                                                     } label="null acceptable" />
                                                     
