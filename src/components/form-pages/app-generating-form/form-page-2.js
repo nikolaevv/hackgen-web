@@ -15,6 +15,15 @@ const FormPageTwo = ({formik}) => {
                 </IconButton>
             </div>
             
+            <div>
+                {formik.values.models.map((model) => {
+                    return (
+                        <div>
+                        <Typography color="secondary" variant="h6">User</Typography>
+                        </div>
+                    );
+                })}
+            </div>
 
             <Button
                 variant="contained"
