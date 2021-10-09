@@ -2,7 +2,6 @@ import React from 'react';
 import { Button, Typography, IconButton, TextField, MenuItem, Select, InputLabel, FormControl, FormControlLabel, Checkbox } from '@material-ui/core';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Field, FieldArray } from 'formik';
 
 const FormPageTwo = ({formik}) => {
     const {values} = formik;
@@ -28,6 +27,13 @@ const FormPageTwo = ({formik}) => {
         );
     };
 
+    const onModelDeleted = (models, idx) => {
+        formik.setFieldValue(
+            `models`, 
+            [...models.slice(0, idx), ...models.slice(idx + 1)]
+        );
+    };
+
     return (
         <div>
             <Typography color="seconary" variant="h5">2 of 2</Typography>
@@ -45,14 +51,20 @@ const FormPageTwo = ({formik}) => {
                     {values.models && values.models.length > 0 ? (
                         values.models.map((model, idx) => (
                             <div className="model-container" key={idx}>
-                                <TextField
-                                    value={model.title}
-                                    id={`models.${idx}.title`}
-                                    name={`models.${idx}.title`}
-                                    onChange={formik.handleChange}
-                                    variant="standard"
-                                    className="model-title"
-                                />
+                                <div>
+                                    <TextField
+                                        value={model.title}
+                                        id={`models.${idx}.title`}
+                                        name={`models.${idx}.title`}
+                                        onChange={formik.handleChange}
+                                        variant="standard"
+                                        className="model-title"
+                                    />
+
+                                    <IconButton onClick={() => onModelDeleted(values.models, idx)} color="primary" aria-label="delete model" component="span">
+                                        <DeleteIcon />
+                                    </IconButton>
+                                </div>
                                     <div>
                                         {values.models[idx].fields && values.models[idx].fields.length > 0 ? (
                                             values.models[idx].fields.map((field, fieldIdx) => (
@@ -104,7 +116,7 @@ const FormPageTwo = ({formik}) => {
                                                         />
                                                     } label="null acceptable" />
                                                     
-                                                    <IconButton onClick={() => onModelFieldDeleted(model, idx, fieldIdx)} color="primary" aria-label="upload picture" component="span">
+                                                    <IconButton onClick={() => onModelFieldDeleted(model, idx, fieldIdx)} color="primary" aria-label="delete model field" component="span">
                                                         <DeleteIcon />
                                                     </IconButton>
                                                 </div>

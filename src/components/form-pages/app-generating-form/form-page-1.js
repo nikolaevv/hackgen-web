@@ -19,6 +19,13 @@ const FormPageOne = ({formik, history}) => {
         }
     };
 
+    const onReactComponentDeleted = (componentNames, idx) => {
+        formik.setFieldValue(
+            `componentNames`, 
+            [...componentNames.slice(0, idx), ...componentNames.slice(idx + 1)]
+        );
+    };
+
     return (
         <div>
             <Typography color="seconary" variant="h5">1 of 2</Typography>
@@ -161,7 +168,7 @@ const FormPageOne = ({formik, history}) => {
                                 <li className="list-item" key={idx}>
                                     <Chip
                                         label={name}
-                                        onDelete={() => {}}
+                                        onDelete={() => onReactComponentDeleted(formik.values.componentNames, idx)}
                                     />
                                 </li>
                             );
