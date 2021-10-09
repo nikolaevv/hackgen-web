@@ -58,3 +58,22 @@ form > div > * {
 .model-container {
     margin-top: 2em;
 }
+
+.creating-block {
+    display: flex;
+    height: 80vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.creating-block > * {
+    margin-bottom: 2em;
+}
+
+.card-content > * {
+    margin-bottom: 0.5em !important;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}

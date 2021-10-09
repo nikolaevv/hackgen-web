@@ -1,13 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useFormik } from 'formik';
-import {Route}from 'react-router';
+import {Route, withRouter}from 'react-router';
 import { schema } from '../schemas';
 import { FormPageOne, FormPageTwo } from '../form-pages/app-generating-form';
+import { useCreateApp, useAppCreatingStatus } from '../../services/generating';
 import { Container } from '@material-ui/core';
-
+import CreatingPage from './creating-page';
 import './pages.css';
 
-const AppGeneratingForm = () => {
+const AppGeneratingForm = ({history}) => {
+    const [appId, generateApp] = useCreateApp();
+    const [appStatus, getAppStatus] = useAppCreatingStatus();
+
+    useEffect(() => {
+        if (appId && appStatus !== 'DONE') {
+            let processId = setInterval(() => getAppStatus(appId), 5000);
+            return () => clearInterval(processId);
+        }
+    }, [appId, getAppStatus, appStatus, history]);
+
     const formik = useFormik({
         initialValues: {
             title: '',
@@ -24,7 +35,8 @@ const AppGeneratingForm = () => {
         validationSchema: schema,
 
         onSubmit: (values) => {
-            alert(JSON.stringify(values, null, 2));
+            generateApp(values);
+            history.push('/app/creating');
         },
     });
     
@@ -39,9 +51,13 @@ const AppGeneratingForm = () => {
                     <FormPageTwo formik={formik}/>
                 )}/>
             </form>
+
+            <Route path="/app/creating" render={() => (
+                <CreatingPage appId={appId} appStatus={appStatus}/>
+            )}/>
         </Container>
 
     );
 };
 
-export default AppGeneratingForm;
+export default withRouter(AppGeneratingForm);
