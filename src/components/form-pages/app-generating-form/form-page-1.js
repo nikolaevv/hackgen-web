@@ -8,7 +8,7 @@ const FormPageOne = ({formik, history}) => {
 
     const addValueToArray = (event, field, values, value) => {
         if (event.keyCode === 13) {
-            formik.setFieldValue(field, [...values, value]);
+            setFieldValue(field, [...values, value]);
             setRecentComponentName('');
         }
     };
@@ -20,11 +20,13 @@ const FormPageOne = ({formik, history}) => {
     };
 
     const onReactComponentDeleted = (componentNames, idx) => {
-        formik.setFieldValue(
+        setFieldValue(
             `componentNames`, 
             [...componentNames.slice(0, idx), ...componentNames.slice(idx + 1)]
         );
     };
+
+    const {handleChange, values, touched, errors, setFieldValue} = formik;
 
     return (
         <div>
@@ -33,10 +35,10 @@ const FormPageOne = ({formik, history}) => {
                 fullWidth
                 label="Title"
                 variant="outlined"
-                value={formik.values.title}
-                onChange={formik.handleChange}
-                error={formik.touched.title && Boolean(formik.errors.title)}
-                helpertext={formik.touched.title && formik.errors.title}
+                value={values.title}
+                onChange={handleChange}
+                error={touched.title && Boolean(errors.title)}
+                helpertext={touched.title && errors.title}
                 id="title"
                 name="title"
             />
@@ -47,10 +49,10 @@ const FormPageOne = ({formik, history}) => {
                     labelid="demo-simple-select-label"
                     id="theme"
                     name="theme"
-                    value={formik.values.theme}
-                    onChange={formik.handleChange}
-                    error={formik.touched.theme && Boolean(formik.errors.theme)}
-                    helpertext={formik.touched.theme && formik.errors.theme}
+                    value={values.theme}
+                    onChange={handleChange}
+                    error={touched.theme && Boolean(errors.theme)}
+                    helpertext={touched.theme && errors.theme}
                     label="Theme"
                 >
                     <MenuItem value={"light"}>light</MenuItem>
@@ -64,14 +66,14 @@ const FormPageOne = ({formik, history}) => {
                     labelid="main-color-select-label"
                     id="mainColor"
                     name="mainColor"
-                    value={formik.values.mainColor}
-                    onChange={formik.handleChange}
-                    error={formik.touched.mainColor && Boolean(formik.errors.mainColor)}
-                    helpertext={formik.touched.mainColor && formik.errors.mainColor}
+                    value={values.mainColor}
+                    onChange={handleChange}
+                    error={touched.mainColor && Boolean(errors.mainColor)}
+                    helpertext={touched.mainColor && errors.mainColor}
                     label="Main Color"
                     endAdornment={
                         <InputAdornment position="end">
-                            <InputColor initialValue={formik.values.mainColor} onChange={(color) => formik.setFieldValue("mainColor", color.hex)} />
+                            <InputColor initialValue={values.mainColor} onChange={(color) => setFieldValue("mainColor", color.hex)} />
                         </InputAdornment>
                     }
                 >
@@ -84,14 +86,14 @@ const FormPageOne = ({formik, history}) => {
                     labelid="contrast-color-select-label"
                     id="contrastColor"
                     name="contrastColor"
-                    value={formik.values.contrastColor}
-                    onChange={formik.handleChange}
-                    error={formik.touched.contrastColor && Boolean(formik.errors.contrastColor)}
-                    helpertext={formik.touched.contrastColor && formik.errors.contrastColor}
+                    value={values.contrastColor}
+                    onChange={handleChange}
+                    error={touched.contrastColor && Boolean(errors.contrastColor)}
+                    helpertext={touched.contrastColor && errors.contrastColor}
                     label="Contrast Color"
                     endAdornment={
                         <InputAdornment position="end">
-                            <InputColor initialValue={formik.values.contrastColor} onChange={(color) => formik.setFieldValue("contrastColor", color.hex)} />
+                            <InputColor initialValue={values.contrastColor} onChange={(color) => setFieldValue("contrastColor", color.hex)} />
                         </InputAdornment>
                     }
                 >
@@ -104,14 +106,14 @@ const FormPageOne = ({formik, history}) => {
                     labelid="secondary-color-select-label"
                     id="secondaryColor"
                     name="secondaryColor"
-                    value={formik.values.secondaryColor}
-                    onChange={formik.handleChange}
-                    error={formik.touched.secondaryColor && Boolean(formik.errors.secondaryColor)}
-                    helpertext={formik.touched.secondaryColor && formik.errors.secondaryColor}
+                    value={values.secondaryColor}
+                    onChange={handleChange}
+                    error={touched.secondaryColor && Boolean(errors.secondaryColor)}
+                    helpertext={touched.secondaryColor && errors.secondaryColor}
                     label="Secondary Color"
                     endAdornment={
                         <InputAdornment position="end">
-                            <InputColor initialValue={formik.values.secondaryColor} onChange={(color) => formik.setFieldValue("secondaryColor", color.hex)} />
+                            <InputColor initialValue={values.secondaryColor} onChange={(color) => setFieldValue("secondaryColor", color.hex)} />
                         </InputAdornment>
                     }
                 >
@@ -124,13 +126,13 @@ const FormPageOne = ({formik, history}) => {
                     labelid="secondary-contrast-color-select-label"
                     id="secondaryContrastColor"
                     name="secondaryContrastColor"
-                    value={formik.values.secondaryContrastColor}
-                    error={formik.touched.secondaryContrastColor && Boolean(formik.errors.secondaryContrastColor)}
-                    helpertext={formik.touched.secondaryContrastColor && formik.errors.secondaryContrastColor}
+                    value={values.secondaryContrastColor}
+                    error={touched.secondaryContrastColor && Boolean(errors.secondaryContrastColor)}
+                    helpertext={touched.secondaryContrastColor && errors.secondaryContrastColor}
                     label="Secondary contrast color"
                     endAdornment={
                         <InputAdornment position="end">
-                            <InputColor initialValue={formik.values.secondaryContrastColor} onChange={(color) => formik.setFieldValue("secondaryContrastColor", color.hex)} />
+                            <InputColor initialValue={values.secondaryContrastColor} onChange={(color) => setFieldValue("secondaryContrastColor", color.hex)} />
                         </InputAdornment>
                     }
                 >
@@ -163,12 +165,12 @@ const FormPageOne = ({formik, history}) => {
                 component="ul"
                 >
                     {
-                        formik.values.componentNames.map((name, idx) => {
+                        values.componentNames.map((name, idx) => {
                             return (
                                 <li className="list-item" key={idx}>
                                     <Chip
                                         label={name}
-                                        onDelete={() => onReactComponentDeleted(formik.values.componentNames, idx)}
+                                        onDelete={() => onReactComponentDeleted(values.componentNames, idx)}
                                     />
                                 </li>
                             );
@@ -181,7 +183,7 @@ const FormPageOne = ({formik, history}) => {
                     variant="standard"
                     onChange={(e) => setRecentComponentName(e.target.value)}
                     value={recentComponentName}
-                    onKeyUp={(e) => addValueToArray(e, "componentNames", formik.values.componentNames, recentComponentName)}
+                    onKeyUp={(e) => addValueToArray(e, "componentNames", values.componentNames, recentComponentName)}
                 />
                 
             </Paper>
