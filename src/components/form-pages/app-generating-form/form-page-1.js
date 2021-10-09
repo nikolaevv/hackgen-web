@@ -3,30 +3,15 @@ import InputColor from 'react-input-color';
 import { withRouter } from 'react-router';
 import { TextField, Button, Select, InputLabel, MenuItem, FormControl, OutlinedInput, InputAdornment, Chip, Box, Paper, Typography } from '@material-ui/core';
 
-const FormPageOne = ({formik, history}) => {
+const FormPageOne = ({formik, history, onRemovedFromArray, onAddToArray}) => {
     const [recentComponentName, setRecentComponentName] = useState('');
-
-    const addValueToArray = (event, field, values, value) => {
-        if (event.keyCode === 13) {
-            setFieldValue(field, [...values, value]);
-            setRecentComponentName('');
-        }
-    };
+    const {handleChange, values, touched, errors, setFieldValue} = formik;
 
     const onContinueClicked = () => {
         if (formik.isValid) {
             history.push('/app/create/2');
         }
     };
-
-    const onReactComponentDeleted = (componentNames, idx) => {
-        setFieldValue(
-            `componentNames`, 
-            [...componentNames.slice(0, idx), ...componentNames.slice(idx + 1)]
-        );
-    };
-
-    const {handleChange, values, touched, errors, setFieldValue} = formik;
 
     return (
         <div>
@@ -170,7 +155,7 @@ const FormPageOne = ({formik, history}) => {
                                 <li className="list-item" key={idx}>
                                     <Chip
                                         label={name}
-                                        onDelete={() => onReactComponentDeleted(values.componentNames, idx)}
+                                        onDelete={() => onRemovedFromArray('componentNames', values.componentNames, idx)}
                                     />
                                 </li>
                             );
@@ -183,7 +168,7 @@ const FormPageOne = ({formik, history}) => {
                     variant="standard"
                     onChange={(e) => setRecentComponentName(e.target.value)}
                     value={recentComponentName}
-                    onKeyUp={(e) => addValueToArray(e, "componentNames", values.componentNames, recentComponentName)}
+                    onKeyUp={(e) => e.keyCode === 13 && onAddToArray('componentNames', values.componentNames, recentComponentName, setRecentComponentName)}
                 />
                 
             </Paper>

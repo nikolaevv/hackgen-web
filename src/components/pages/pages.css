@@ -1,6 +1,6 @@
 form {
     margin-top: 2em;
-    width: 60%;
+    width: 80%;
 }
 
 .list-item {
@@ -35,11 +35,14 @@ form > div > * {
 
 .model-field {
     display: flex;
+    justify-content: center;
+    align-items: center;
     margin-top: 1em;
 }
 
 .model-field > * {
     margin-right: 1em !important;
+    flex-basis: 0;
     flex-grow: 1;
 }
 
@@ -76,4 +79,15 @@ form > div > * {
     text-align: center;
     display: flex;
     flex-direction: column;
+}
+
+.chip-array-row {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.chip-array-row > * {
+    margin-right: 0.5em !important;
 }

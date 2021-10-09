@@ -29,7 +29,7 @@ const AppGeneratingForm = ({history}) => {
             secondaryContrastColor: '#000',
             componentNames: ['header', 'footer'],
             models: [
-                {'title': 'User', relations: [], fields: [{'type': 'Integer', 'name': 'age', 'nullable': false, 'default': ''}, {'type': 'Integer', 'name': 'isGood', 'nullable': true, 'default': ''}]}
+                {'title': 'User', relations: [], fields: [{'type': 'Integer', 'name': 'age', 'nullable': false, 'default': '', 'choices': ['AIRPORT', 'BUSINESS']}, {'type': 'Integer', 'name': 'isGood', 'nullable': true, 'default': '', 'choices': []}]}
             ]
         },
         validationSchema: schema,
@@ -39,16 +39,28 @@ const AppGeneratingForm = ({history}) => {
             history.push('/app/creating');
         },
     });
+
+    const onRemovedFromArray = (name, arr, idx) => {
+        formik.setFieldValue(
+            name, 
+            [...arr.slice(0, idx), ...arr.slice(idx + 1)]
+        );
+    };
+
+    const onAddToArray = (field, values, value, callback) => {
+        formik.setFieldValue(field, [...values, value]);
+        callback('');
+    };
     
     return (
         <Container>
             <form onSubmit={formik.handleSubmit}>
                 <Route path="/app/create/1" render={() => (
-                    <FormPageOne formik={formik}/>
+                    <FormPageOne formik={formik} onRemovedFromArray={onRemovedFromArray} onAddToArray={onAddToArray}/>
                 )}/>
 
                 <Route path="/app/create/2" render={() => (
-                    <FormPageTwo formik={formik}/>
+                    <FormPageTwo formik={formik} onRemovedFromArray={onRemovedFromArray} onAddToArray={onAddToArray}/>
                 )}/>
             </form>
 
