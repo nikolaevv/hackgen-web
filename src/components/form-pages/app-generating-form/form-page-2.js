@@ -3,6 +3,72 @@ import { Button, Typography, IconButton, TextField, MenuItem, Select, InputLabel
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import DeleteIcon from '@mui/icons-material/Delete';
 
+const DefaultField = ({value, fieldType, handleChange, idx, fieldIdx, choices}) => {
+    let type = 'text';
+    let disabled = false;
+
+    if (['Integer', 'Float'].includes(fieldType)) {
+        type = 'number';
+    }
+    else if (fieldType === 'Relation') {
+        disabled = true;
+    }
+    else if (fieldType === 'enum') {
+        return (
+            <FormControl fullWidth>
+                <InputLabel id={`default-selector-${idx}-${fieldIdx}`}>Default</InputLabel>
+                <Select
+                    labelid={`default-selector-${idx}-${fieldIdx}`}
+                    id={`models.${idx}.fields.${fieldIdx}.default`}
+                    name={`models.${idx}.fields.${fieldIdx}.default`}
+                    value={value}
+                    onChange={handleChange}
+                    label="Default"
+                >
+                    {
+                        choices.map((choice, defaultChoiceIndex) => (
+                            <MenuItem value={choice}>{choice}</MenuItem>
+                        ))
+                    }
+                </Select>
+            </FormControl>
+        );
+    }
+    else if (fieldType === 'Boolean') {
+        return (
+            <FormControl fullWidth>
+                <InputLabel id={`default-selector-${idx}-${fieldIdx}`}>Default</InputLabel>
+                <Select
+                    labelid={`default-selector-${idx}-${fieldIdx}`}
+                    id={`models.${idx}.fields.${fieldIdx}.default`}
+                    name={`models.${idx}.fields.${fieldIdx}.default`}
+                    value={value}
+                    onChange={handleChange}
+                    label="Default"
+                >
+                    
+                    <MenuItem value={true}>true</MenuItem>
+                    <MenuItem value={false}>false</MenuItem>
+                </Select>
+            </FormControl>
+        );
+    }
+    
+    return (
+        <TextField
+            fullWidth
+            label="Default value"
+            variant="outlined"
+            disabled={disabled}
+            type={type}
+            value={value}
+            onChange={handleChange}
+            id={`models.${idx}.fields.${fieldIdx}.default`}
+            name={`models.${idx}.fields.${fieldIdx}.default`}
+        />
+    );
+};
+
 const ModelWidget = ({model, idx, formik, onRemovedFromArray, onAddToArray}) => {
     const [recentChoiceValue, setRecentChoiceValue] = useState('');
 
@@ -103,15 +169,7 @@ const ModelWidget = ({model, idx, formik, onRemovedFromArray, onAddToArray}) => 
                                     </Select>
                                 </FormControl>
 
-                                <TextField
-                                    fullWidth
-                                    label="Default value"
-                                    variant="outlined"
-                                    value={field.default}
-                                    onChange={formik.handleChange}
-                                    id={`models.${idx}.fields.${fieldIdx}.default`}
-                                    name={`models.${idx}.fields.${fieldIdx}.default`}
-                                />
+                                <DefaultField value={field.default} fieldType={field.type} handleChange={formik.handleChange} choices={field.choices} idx={idx} fieldIdx={fieldIdx}/>
 
                                 <FormControlLabel control={
                                     <Checkbox
