@@ -29,7 +29,7 @@ const DefaultField = ({value, fieldType, handleChange, idx, fieldIdx, choices}) 
                 >
                     {
                         choices.map((choice, defaultChoiceIndex) => (
-                            <MenuItem key={defaultChoiceIndex} value={choice}>{choice}</MenuItem>
+                            <MenuItem key={`default-choice-${defaultChoiceIndex}`} value={choice}>{choice}</MenuItem>
                         ))
                     }
                 </Select>
@@ -120,7 +120,7 @@ const ModelWidget = ({model, idx, formik, onRemovedFromArray, onAddToArray}) => 
                     {values.models[idx].fields && values.models[idx].fields.length > 0 ? (
                         values.models[idx].fields.map((field, fieldIdx) => (
                             
-                            <ScrollBox>
+                            <ScrollBox key={fieldIdx}>
                                 {
                                     field.type === 'Relation' ? (
                                         
@@ -280,7 +280,7 @@ const FormPageTwo = ({formik, onRemovedFromArray, onAddToArray}) => {
                 <div>
                     {values.models && values.models.length > 0 ? (
                         values.models.map((model, idx) => {
-                            return <ModelWidget key={idx} model={model} idx={idx} formik={formik} onRemovedFromArray={onRemovedFromArray} onAddToArray={onAddToArray}/>
+                            return <ModelWidget key={`model-widget-${idx}`} model={model} idx={idx} formik={formik} onRemovedFromArray={onRemovedFromArray} onAddToArray={onAddToArray}/>
                         })
                     ) : <div/>}
                 </div>

@@ -1,6 +1,6 @@
 form {
     margin-top: 2em;
-    width: 80%;
+    width: 100%;
 }
 
 .list-item {
@@ -96,12 +96,17 @@ form > div > * {
 }
 
 .form-page-one {
-    width: 50%;
+    width: 40%;
 }
 
 .scroll-box__container > * {
     margin-right: 1em !important;
     display: flex;
+    align-items: center;
+}
+
+.field-element {
+    min-width: 10em !important;
 }
 
 @media (max-width: 900px) {
@@ -118,6 +123,6 @@ form > div > * {
     }
 
     .field-element {
-        width: 10em !important;
+        min-width: 10em !important;
     }
 }

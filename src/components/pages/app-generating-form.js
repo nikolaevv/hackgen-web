@@ -49,6 +49,8 @@ const AppGeneratingForm = ({history}) => {
 
     const onAddToArray = (field, values, value, callback) => {
         formik.setFieldValue(field, [...values, value]);
+        
+        console.log(callback)
         callback('');
     };
     
