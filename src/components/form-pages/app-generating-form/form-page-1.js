@@ -14,7 +14,7 @@ const FormPageOne = ({formik, history, onRemovedFromArray, onAddToArray}) => {
     };
 
     return (
-        <div>
+        <div className="form-page-one">
             <Typography color="seconary" variant="h5">1 of 2</Typography>
             <TextField
                 fullWidth

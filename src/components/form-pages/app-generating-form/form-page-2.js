@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button, Typography, IconButton, TextField, MenuItem, Select, InputLabel, FormControl, FormControlLabel, Checkbox, Box, Chip } from '@material-ui/core';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import DeleteIcon from '@mui/icons-material/Delete';
+import ScrollBox from '../../scroll-box/ScrollBox';
 
 const DefaultField = ({value, fieldType, handleChange, idx, fieldIdx, choices}) => {
     let type = 'text';
@@ -18,6 +19,7 @@ const DefaultField = ({value, fieldType, handleChange, idx, fieldIdx, choices}) 
             <FormControl fullWidth>
                 <InputLabel id={`default-selector-${idx}-${fieldIdx}`}>Default</InputLabel>
                 <Select
+                    className="field-element"
                     labelid={`default-selector-${idx}-${fieldIdx}`}
                     id={`models.${idx}.fields.${fieldIdx}.default`}
                     name={`models.${idx}.fields.${fieldIdx}.default`}
@@ -27,7 +29,7 @@ const DefaultField = ({value, fieldType, handleChange, idx, fieldIdx, choices}) 
                 >
                     {
                         choices.map((choice, defaultChoiceIndex) => (
-                            <MenuItem value={choice}>{choice}</MenuItem>
+                            <MenuItem key={defaultChoiceIndex} value={choice}>{choice}</MenuItem>
                         ))
                     }
                 </Select>
@@ -39,6 +41,7 @@ const DefaultField = ({value, fieldType, handleChange, idx, fieldIdx, choices}) 
             <FormControl fullWidth>
                 <InputLabel id={`default-selector-${idx}-${fieldIdx}`}>Default</InputLabel>
                 <Select
+                    className="field-element"
                     labelid={`default-selector-${idx}-${fieldIdx}`}
                     id={`models.${idx}.fields.${fieldIdx}.default`}
                     name={`models.${idx}.fields.${fieldIdx}.default`}
@@ -56,6 +59,7 @@ const DefaultField = ({value, fieldType, handleChange, idx, fieldIdx, choices}) 
     
     return (
         <TextField
+            className="field-element"
             fullWidth
             label="Default value"
             variant="outlined"
@@ -115,9 +119,11 @@ const ModelWidget = ({model, idx, formik, onRemovedFromArray, onAddToArray}) => 
                 <div>
                     {values.models[idx].fields && values.models[idx].fields.length > 0 ? (
                         values.models[idx].fields.map((field, fieldIdx) => (
-                            <div className="model-field" key={fieldIdx}>
+                            
+                            <ScrollBox>
                                 {
                                     field.type === 'Relation' ? (
+                                        
                                         <FormControl fullWidth>
                                             <InputLabel id={`relation-selector-${idx}-${fieldIdx}`}>Relation to</InputLabel>
                                             <Select
@@ -127,6 +133,7 @@ const ModelWidget = ({model, idx, formik, onRemovedFromArray, onAddToArray}) => 
                                                 value={field.name}
                                                 onChange={formik.handleChange}
                                                 label="Relation to"
+                                                className="field-element"
                                             >
                                                 {
                                                     otherModels.map((realtionModel, relModelIdx) => (
@@ -135,7 +142,9 @@ const ModelWidget = ({model, idx, formik, onRemovedFromArray, onAddToArray}) => 
                                                 }
                                             </Select>
                                         </FormControl>
+                                        
                                     ) : (
+                                        
                                         <TextField
                                         fullWidth
                                         label="Name"
@@ -144,10 +153,13 @@ const ModelWidget = ({model, idx, formik, onRemovedFromArray, onAddToArray}) => 
                                         onChange={formik.handleChange}
                                         id={`models.${idx}.fields.${fieldIdx}.name`}
                                         name={`models.${idx}.fields.${fieldIdx}.name`}
-                                    />
+                                        className="field-element"
+                                        />
+                                        
                                     )
                                 }
-
+                                
+                                
                                 <FormControl fullWidth>
                                     <InputLabel id={`type-selector-${idx}-${fieldIdx}`}>Type</InputLabel>
                                     <Select
@@ -157,6 +169,7 @@ const ModelWidget = ({model, idx, formik, onRemovedFromArray, onAddToArray}) => 
                                         value={field.type}
                                         onChange={formik.handleChange}
                                         label="Type"
+                                        className="field-element"
                                     >
                                         <MenuItem value={"Integer"}>Integer</MenuItem>
                                         <MenuItem value={"Text"}>String</MenuItem>
@@ -168,10 +181,14 @@ const ModelWidget = ({model, idx, formik, onRemovedFromArray, onAddToArray}) => 
                                         <MenuItem value={"Relation"}>Relation</MenuItem>
                                     </Select>
                                 </FormControl>
-
+                                
+                                
+                                
                                 <DefaultField value={field.default} fieldType={field.type} handleChange={formik.handleChange} choices={field.choices} idx={idx} fieldIdx={fieldIdx}/>
+                                
 
-                                <FormControlLabel control={
+                                
+                                <FormControlLabel className="field-element" control={
                                     <Checkbox
                                         checked={field.nullable}
                                         onChange={formik.handleChange}
@@ -179,11 +196,13 @@ const ModelWidget = ({model, idx, formik, onRemovedFromArray, onAddToArray}) => 
                                         name={`models.${idx}.fields.${fieldIdx}.nullable`}
                                     />
                                 } label="null acceptable" />
+                                
 
+                                
                                 {
                                     field.type === 'enum' && (
                                         <div className="chip-array-row">
-                                            <Box sx={{display: 'flex', justifyContent: 'flex-start', listStyle: 'none', p: 0, m: 0,}}component="ul">
+                                            <Box className="field-element" sx={{display: 'flex', justifyContent: 'flex-start', listStyle: 'none', p: 0, m: 0,}}component="ul">
                                                 {
                                                     field.choices.map((choiceValue, choiceIdx) => {
                                                         return (
@@ -199,6 +218,7 @@ const ModelWidget = ({model, idx, formik, onRemovedFromArray, onAddToArray}) => 
                                             </Box>
 
                                             <TextField
+                                                className="field-element"
                                                 fullwidth
                                                 label="Enter choice"
                                                 variant="standard"
@@ -209,11 +229,15 @@ const ModelWidget = ({model, idx, formik, onRemovedFromArray, onAddToArray}) => 
                                         </div>
                                     )
                                 }
+
+                                <div>
+                                    <IconButton onClick={() => onModelFieldDeleted(model, idx, fieldIdx)} color="primary" aria-label="delete model field" component="span">
+                                        <DeleteIcon />
+                                    </IconButton>
+                                </div>
                                 
-                                <IconButton onClick={() => onModelFieldDeleted(model, idx, fieldIdx)} color="primary" aria-label="delete model field" component="span">
-                                    <DeleteIcon />
-                                </IconButton>
-                            </div>
+                            </ScrollBox>
+                            
                         ))
                     ) : <div></div>}
                 </div>
@@ -256,7 +280,7 @@ const FormPageTwo = ({formik, onRemovedFromArray, onAddToArray}) => {
                 <div>
                     {values.models && values.models.length > 0 ? (
                         values.models.map((model, idx) => {
-                            return <ModelWidget model={model} idx={idx} formik={formik} onRemovedFromArray={onRemovedFromArray} onAddToArray={onAddToArray}/>
+                            return <ModelWidget key={idx} model={model} idx={idx} formik={formik} onRemovedFromArray={onRemovedFromArray} onAddToArray={onAddToArray}/>
                         })
                     ) : <div/>}
                 </div>

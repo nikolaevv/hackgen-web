@@ -38,12 +38,15 @@ form > div > * {
     justify-content: center;
     align-items: center;
     margin-top: 1em;
+    position: relative;
+    overflow: auto;
 }
 
 .model-field > * {
     margin-right: 1em !important;
-    flex-basis: 0;
+    flex-basis: 500px;
     flex-grow: 1;
+    min-width: 200px !important;
 }
 
 .model-title {
@@ -90,4 +93,31 @@ form > div > * {
 
 .chip-array-row > * {
     margin-right: 0.5em !important;
+}
+
+.form-page-one {
+    width: 50%;
+}
+
+.scroll-box__container > * {
+    margin-right: 1em !important;
+    display: flex;
+}
+
+@media (max-width: 900px) {
+    form {
+        width: 100%;
+    }
+
+    .form-page-one {
+        width: 100%;
+    }
+
+    .scroll-box__container > * {
+        margin-right: 1em !important;
+    }
+
+    .field-element {
+        width: 10em !important;
+    }
 }
