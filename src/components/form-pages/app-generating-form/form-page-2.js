@@ -16,7 +16,7 @@ const DefaultField = ({value, fieldType, handleChange, idx, fieldIdx, choices}) 
     }
     else if (fieldType === 'enum') {
         return (
-            <FormControl fullWidth>
+            <FormControl>
                 <InputLabel id={`default-selector-${idx}-${fieldIdx}`}>Default</InputLabel>
                 <Select
                     className="field-element"
@@ -38,7 +38,7 @@ const DefaultField = ({value, fieldType, handleChange, idx, fieldIdx, choices}) 
     }
     else if (fieldType === 'Boolean') {
         return (
-            <FormControl fullWidth>
+            <FormControl>
                 <InputLabel id={`default-selector-${idx}-${fieldIdx}`}>Default</InputLabel>
                 <Select
                     className="field-element"
@@ -61,7 +61,7 @@ const DefaultField = ({value, fieldType, handleChange, idx, fieldIdx, choices}) 
         <TextField
             className="field-element"
             fullWidth
-            label="Default value"
+            label="Default"
             variant="outlined"
             disabled={disabled}
             type={type}
@@ -73,9 +73,39 @@ const DefaultField = ({value, fieldType, handleChange, idx, fieldIdx, choices}) 
     );
 };
 
-const ModelWidget = ({model, idx, formik, onRemovedFromArray, onAddToArray}) => {
+const Choices = ({choices, idx, fieldIdx, onRemovedFromArray, onAddToArray}) => {
     const [recentChoiceValue, setRecentChoiceValue] = useState('');
 
+    return (
+        <div className="chip-array-row">
+            <Box className="field-element" sx={{display: 'flex', justifyContent: 'flex-start', listStyle: 'none', p: 0, m: 0,}}component="ul">
+                {
+                    choices.map((choiceValue, choiceIdx) => {
+                        return (
+                            <li className="list-item" key={choiceIdx}>
+                                <Chip
+                                    label={choiceValue}
+                                    onDelete={() => onRemovedFromArray(`models.${idx}.fields.${fieldIdx}.choices`, choices, choiceIdx)}
+                                />
+                            </li>
+                        );
+                    })
+                }
+            </Box>
+
+            <TextField
+                className="field-element"
+                label="Enter choice"
+                variant="standard"
+                onChange={(e) => setRecentChoiceValue(e.target.value)}
+                value={recentChoiceValue}
+                onKeyUp={(e) => e.key === 'Enter' && onAddToArray(`models.${idx}.fields.${fieldIdx}.choices`, choices, recentChoiceValue, setRecentChoiceValue)}
+            />
+        </div>
+    );
+};
+
+const ModelWidget = ({model, idx, formik, onRemovedFromArray, onAddToArray}) => {
     const {values} = formik;
     const otherModels = [...values.models.slice(0, idx), ...values.models.slice(idx + 1)];
 
@@ -119,12 +149,11 @@ const ModelWidget = ({model, idx, formik, onRemovedFromArray, onAddToArray}) => 
                 <div>
                     {values.models[idx].fields && values.models[idx].fields.length > 0 ? (
                         values.models[idx].fields.map((field, fieldIdx) => (
-                            
                             <ScrollBox key={fieldIdx}>
                                 {
                                     field.type === 'Relation' ? (
                                         
-                                        <FormControl fullWidth>
+                                        <FormControl>
                                             <InputLabel id={`relation-selector-${idx}-${fieldIdx}`}>Relation to</InputLabel>
                                             <Select
                                                 labelid={`relation-selector-${idx}-${fieldIdx}`}
@@ -159,8 +188,7 @@ const ModelWidget = ({model, idx, formik, onRemovedFromArray, onAddToArray}) => 
                                     )
                                 }
                                 
-                                
-                                <FormControl fullWidth>
+                                <FormControl>
                                     <InputLabel id={`type-selector-${idx}-${fieldIdx}`}>Type</InputLabel>
                                     <Select
                                         labelid={`type-selector-${idx}-${fieldIdx}`}
@@ -182,12 +210,8 @@ const ModelWidget = ({model, idx, formik, onRemovedFromArray, onAddToArray}) => 
                                     </Select>
                                 </FormControl>
                                 
-                                
-                                
                                 <DefaultField value={field.default} fieldType={field.type} handleChange={formik.handleChange} choices={field.choices} idx={idx} fieldIdx={fieldIdx}/>
-                                
 
-                                
                                 <FormControlLabel className="field-element" control={
                                     <Checkbox
                                         checked={field.nullable}
@@ -196,37 +220,10 @@ const ModelWidget = ({model, idx, formik, onRemovedFromArray, onAddToArray}) => 
                                         name={`models.${idx}.fields.${fieldIdx}.nullable`}
                                     />
                                 } label="null acceptable" />
-                                
 
-                                
                                 {
                                     field.type === 'enum' && (
-                                        <div className="chip-array-row">
-                                            <Box className="field-element" sx={{display: 'flex', justifyContent: 'flex-start', listStyle: 'none', p: 0, m: 0,}}component="ul">
-                                                {
-                                                    field.choices.map((choiceValue, choiceIdx) => {
-                                                        return (
-                                                            <li className="list-item" key={choiceIdx}>
-                                                                <Chip
-                                                                    label={choiceValue}
-                                                                    onDelete={() => onRemovedFromArray(`models.${idx}.fields.${fieldIdx}.choices`, field.choices, choiceIdx)}
-                                                                />
-                                                            </li>
-                                                        );
-                                                    })
-                                                }
-                                            </Box>
-
-                                            <TextField
-                                                className="field-element"
-                                                fullwidth
-                                                label="Enter choice"
-                                                variant="standard"
-                                                onChange={(e) => setRecentChoiceValue(e.target.value)}
-                                                value={recentChoiceValue}
-                                                onKeyUp={(e) => e.keyCode === 13 && onAddToArray(`models.${idx}.fields.${fieldIdx}.choices`, field.choices, recentChoiceValue, setRecentChoiceValue)}
-                                            />
-                                        </div>
+                                        <Choices idx={idx} fieldIdx={fieldIdx} choices={field.choices} onRemovedFromArray={onRemovedFromArray} onAddToArray={onAddToArray}/>
                                     )
                                 }
 
@@ -288,7 +285,7 @@ const FormPageTwo = ({formik, onRemovedFromArray, onAddToArray}) => {
 
             <Button
                 variant="contained"
-                type="submit"
+                onClick={formik.submitForm}
                 className="submit-btn"
             >
                     Create app
