@@ -14,4 +14,7 @@ const theme = createTheme({
 	},
 });
 
-export {theme};
+const frontendAvailableStacks = ['React JS'];
+const backendAvailableStacks = ['Python 3 / Fast API'];
+
+export { theme, frontendAvailableStacks, backendAvailableStacks };

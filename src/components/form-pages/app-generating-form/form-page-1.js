@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { frontendAvailableStacks, backendAvailableStacks } from '../../../config';
 import InputColor from 'react-input-color';
 import { withRouter } from 'react-router';
 import { TextField, Button, Select, InputLabel, MenuItem, FormControl, OutlinedInput, InputAdornment, Chip, Box, Paper, Typography } from '@material-ui/core';
@@ -29,9 +30,45 @@ const FormPageOne = ({formik, history, onRemovedFromArray, onAddToArray}) => {
             />
 
             <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Theme</InputLabel>
+                <InputLabel id="frontend-stack-select-label">Frontend technology</InputLabel>
                 <Select
-                    labelid="demo-simple-select-label"
+                    labelid="frontend-stack-select-label"
+                    id="frontendStack"
+                    name="frontendStack"
+                    defaultValue={frontendAvailableStacks[0]}
+                    label="frontendStack"
+                >
+                    {
+                        frontendAvailableStacks.map((availableStack, availableStackIdx) => (
+                            <MenuItem key={availableStackIdx} value={availableStack}>{availableStack}</MenuItem>
+                        ))
+                    }
+                    
+                </Select>
+            </FormControl>
+
+            <FormControl fullWidth>
+                <InputLabel id="backend-stack-select-label">Backend technology</InputLabel>
+                <Select
+                    labelid="backend-stack-select-label"
+                    id="backendStack"
+                    name="backendStack"
+                    defaultValue={backendAvailableStacks[0]}
+                    label="backendStack"
+                >
+                    {
+                        backendAvailableStacks.map((availableStack, availableStackIdx) => (
+                            <MenuItem key={availableStackIdx} value={availableStack}>{availableStack}</MenuItem>
+                        ))
+                    }
+                    
+                </Select>
+            </FormControl>
+
+            <FormControl fullWidth>
+                <InputLabel id="theme-select-label">Theme</InputLabel>
+                <Select
+                    labelid="theme-select-label"
                     id="theme"
                     name="theme"
                     value={values.theme}
