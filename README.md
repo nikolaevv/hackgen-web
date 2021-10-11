@@ -19,7 +19,7 @@ Why it is required service:
 - Move to this respository: `cd hackgen-web`
 - Run `npm install` for installing required packages
 - Run `npm start` and check that app is working
-It's running on http://127.0.0.1:3000
+Then open http://127.0.0.1:3000/app/create/1
 
 ## What does it generate
 - Backend
