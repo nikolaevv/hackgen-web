@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const urlBase = 'http://127.0.0.1:8000'
+const urlBase = 'https://hackgen1.herokuapp.com'
 const apiBase = `${urlBase}/api/app`;
 const headersBase = {'Content-Type': 'application/json'};
 
