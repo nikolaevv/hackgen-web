@@ -16,7 +16,7 @@ Why it is required service:
 - It's interface is fast & beautiful
 
 ## Demo
-You can use it online via https://react-edfree.vercel.app/
+You can use it online via https://hackgen.vercel.app/
 
 ## Install
 - Clone repository using `git clone https://github.com/nikolaevv/hackgen-web`
