@@ -6,3 +6,8 @@
 a {
     text-decoration: none !important;
 }
+
+.github-btn {
+    width: 10em;
+    margin-bottom: 1em;
+}
