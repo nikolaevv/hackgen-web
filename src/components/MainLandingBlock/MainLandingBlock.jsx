@@ -12,11 +12,11 @@ const MainLandingBlock = (props) => (
   <Container>
     <div className="main-block">
       <div>
-        <Typography variant="h1" color="primary" style={{fontWeight: 500}}>
+        <Typography variant="h2" color="primary" style={{fontWeight: 500}}>
         HackGen
         </Typography>
         <br/>
-        <Typography variant="h3">
+        <Typography variant="h4">
           The open-source code generator that will boost your work
         </Typography>
         <br/><br/>
