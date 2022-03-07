@@ -1,0 +1,38 @@
+.PartnersLandingBlock {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.partner-img {
+    width: 6em;
+}
+
+.PartnersLandingBlockWrapper {
+    background-color: #f3f6f9;
+    padding-top: 5em;
+    padding-bottom: 5em;
+}
+
+.competitions-container {
+    display: flex;
+    margin-top: 2em;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media (max-width: 900px) {
+    .competitions-container {
+        flex-wrap: wrap;
+    }
+    .competitions-item {
+        margin-bottom: 0.5em;
+    }
+
+    .PartnersLandingBlockWrapper {
+        background-color: #f3f6f9;
+        padding-top: 2em;
+        padding-bottom: 2em;
+    }
+}

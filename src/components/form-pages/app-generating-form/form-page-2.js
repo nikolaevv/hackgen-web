@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Typography, IconButton, TextField, MenuItem, Select, InputLabel, FormControl, FormControlLabel, Checkbox, Box, Chip } from '@material-ui/core';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import DeleteIcon from '@mui/icons-material/Delete';
-import ScrollBox from '../../scroll-box/ScrollBox';
+import ScrollBox from '../../../containers/scroll-box/ScrollBox';
 
 const DefaultField = ({value, fieldType, handleChange, idx, fieldIdx, choices}) => {
     let type = 'text';

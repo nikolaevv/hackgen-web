@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useFormik } from 'formik';
-import { Route, withRouter, Redirect }from 'react-router';
+import { Route, withRouter }from 'react-router';
 import { schema } from '../schemas';
 import { FormPageOne, FormPageTwo } from '../form-pages/app-generating-form';
 import { useCreateApp, useAppCreatingStatus } from '../../services/generating';
@@ -58,10 +58,6 @@ const AppGeneratingForm = ({history}) => {
     return (
         <Container>
             <form onSubmit={formik.handleSubmit}>
-                <Route exact path="/">
-                    <Redirect to="/app/create/1" />
-                </Route>
-
                 <Route path="/app/create/1" render={() => (
                     <FormPageOne formik={formik} onRemovedFromArray={onRemovedFromArray} onAddToArray={onAddToArray}/>
                 )}/>

@@ -6,11 +6,14 @@ const theme = createTheme({
         primary: {
             main: '#3498db',
             contrastText: '#ecf0f1',
+            info: '#3E5060',
+            light: '#FFF',
         },
         secondary: {
             main: '#34495e',
             contrastText: '#ecf0f1',
-        }
+            light: '#919da9'
+        },
 	},
 });
 

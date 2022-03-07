@@ -1,0 +1,22 @@
+body {
+    margin: 0;
+}
+
+.main-block {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.coding-img {
+    width: 25em;
+    margin-top: -10em;
+    margin-left: 2em;
+}
+
+@media (max-width: 900px) {
+    .coding-img {
+        display: none;
+    }
+}
