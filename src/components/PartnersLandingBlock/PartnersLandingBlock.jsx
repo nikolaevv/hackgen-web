@@ -10,8 +10,16 @@ import './PartnersLandingBlock.styles.css';
 
 const hackatons = [
   {
+    link: "https://tfalliance.ru/",
+    image: logo4
+  },
+  {
     link: "https://leadersofdigital.ru/",
     image: logo1
+  },
+  {
+    link: "https://moretech.vtb.ru/",
+    image: logo5
   },
   {
     link: "https://vk.com/dubnatech",
@@ -20,14 +28,6 @@ const hackatons = [
   {
     link: "https://vk.com/hackathon",
     image: logo3
-  },
-  {
-    link: "https://tfalliance.ru/",
-    image: logo4
-  },
-  {
-    link: "https://moretech.vtb.ru/",
-    image: logo5
   },
 ];
 
