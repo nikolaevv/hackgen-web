@@ -9,10 +9,12 @@ import logo5 from '../../assets/vtb.png';
 import './PartnersLandingBlock.styles.css';
 
 const hackatons = [
+  /*
   {
     link: "https://tfalliance.ru/",
     image: logo4
   },
+  */
   {
     link: "https://leadersofdigital.ru/",
     image: logo1
