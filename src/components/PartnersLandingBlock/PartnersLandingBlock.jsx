@@ -3,7 +3,7 @@ import { Container, Link, Typography } from '@material-ui/core';
 import logo1 from '../../assets/cp.svg';
 import logo2 from '../../assets/uni-dubna.png';
 import logo3 from '../../assets/vk.png';
-import logo4 from '../../assets/tf.webp';
+//import logo4 from '../../assets/tf.webp';
 import logo5 from '../../assets/vtb.png';
 
 import './PartnersLandingBlock.styles.css';
