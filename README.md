@@ -1,6 +1,6 @@
 # HackGen
 
-[![Generic badge](https://img.shields.io/badge/Web%20App-Up-%3Cgreen%3E.svg)](https://hackgen.vercel.app/)
+[![Generic badge](https://img.shields.io/badge/Web%20App-Up-%3Cgreen%3E.svg)](https://hackgenerate.vercel.app/)
 [![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://github.com/nikolaevv/hackgen-web/blob/main/LICENSE)
 
 React app for fast generating backend & frontend source code for project. 
@@ -16,7 +16,7 @@ Why it is required service:
 - It's interface is fast & beautiful
 
 ## Demo
-You can use it online via https://hackgen.vercel.app/
+You can use it online via https://hackgenerate.vercel.app/
 
 ## Install
 - Clone repository using `git clone https://github.com/nikolaevv/hackgen-web`
